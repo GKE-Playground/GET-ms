@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: IMAGE_NAME
+spec:
+  selector:
+    matchLabels:
+      app: IMAGE_NAME
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: IMAGE_NAME
+    spec:
+      containers:
+      - name: IMAGE_NAME
+        image: europe-west1-docker.pkg.dev/PROJECT_ID/gke-playground/IMAGE_NAME:GIT_TAG
+        ports:
+        - containerPort: 3000
