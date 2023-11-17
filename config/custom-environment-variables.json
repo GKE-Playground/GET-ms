@@ -1,0 +1,8 @@
+{
+  "Service": {
+    "port": {
+      "__name": "SERVICE_PORT",
+      "__format": "json"
+    }
+  }
+}
