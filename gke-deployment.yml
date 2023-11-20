@@ -12,8 +12,20 @@ spec:
       labels:
         app: IMAGE_NAME
     spec:
+      serviceAccountName: gke-test-sa
       containers:
       - name: IMAGE_NAME
         image: europe-west1-docker.pkg.dev/PROJECT_ID/gke-playground/IMAGE_NAME:GIT_TAG
         ports:
         - containerPort: 3000
+        env:
+        - name: INSTANCE_HOST
+          value: "127.0.0.1"
+        - name: DB_PORT
+          value: "5432" 
+        - name: DB_USER
+          value: "tung-user"
+        - name: DB_PASS
+          value: "tung123"
+        - name: DB_NAME
+          value: "tung-database"

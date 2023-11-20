@@ -40,7 +40,7 @@ app.get("/", (_req: Request, res: Response) => {
 app.get("/getData", async (_req: Request, res: Response) => {
   try {
     // Run the select query using the pool
-    const queryResult = await pool.query("SELECT * FROM TODO");
+    const queryResult = await pool.query("SELECT * FROM todos");
 
     // Send the query results as JSON
     res.json(queryResult.rows);
