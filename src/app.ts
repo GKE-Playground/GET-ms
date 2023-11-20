@@ -23,9 +23,9 @@ const PORT = config.get<string>("SERVICE_PORT") || 3000;
 // Create a MySQL connection pool
 const pool = new Pool({
   user: "woo-backend",
-  host: "localhost", 
+  host: "localhost",
   database: "integration-test",
-  password: "woo-backend", 
+  password: "woo-backend",
   port: 5432,
 });
 
