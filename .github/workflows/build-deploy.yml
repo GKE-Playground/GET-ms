@@ -34,8 +34,6 @@ jobs:
           export_environment_variables: true
 
       - name: Build and push Docker image
-        env:
-          GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         run: |-
           gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
           docker build -t europe-west1-docker.pkg.dev/$PROJECT_ID/gke-playground/$IMAGE_NAME:latest .
@@ -50,8 +48,6 @@ jobs:
           location: ${{ env.REGION }}
 
       - name: Deploy to GKE
-        env:
-          GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         run: |-
           sed -i "s/PROJECT_ID/$PROJECT_ID/g" gke-deployment.yml
           sed -i "s/IMAGE_NAME/$IMAGE_NAME/g" gke-deployment.yml
