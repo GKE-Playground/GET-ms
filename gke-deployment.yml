@@ -22,11 +22,20 @@ spec:
         - containerPort: 3000
         env:
         - name: DB_USER
-          value: "tung-user"
+          valueFrom:
+            secretKeyRef:
+              name: tung-db-secret
+              key: username
         - name: DB_PASS
-          value: "tung123"
+          valueFrom:
+            secretKeyRef:
+              name: tung-db-secret
+              key: password
         - name: DB_NAME
-          value: "tung-database"
+          valueFrom:
+            secretKeyRef:
+              name: tung-db-secret
+              key: database
       - name: cloud-sql-proxy
         # This uses the latest version of the Cloud SQL Proxy
         # It is recommended to use a specific version for production environments.

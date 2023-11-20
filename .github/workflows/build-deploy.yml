@@ -10,7 +10,7 @@ env:
   GKE_CLUSTER: autopilot-cluster-1
   REGION: europe-west1
   DEPLOYMENT_NAME: hello-ms
-  GIT_TAG: v0.3.5
+  GIT_TAG: v0.3.6
 
 jobs:
   build-push-gcr:
