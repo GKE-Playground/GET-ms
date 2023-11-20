@@ -7,7 +7,6 @@ spec:
   selector:
     matchLabels:
       app: IMAGE_NAME
-  replicas: 2
   template:
     metadata:
       labels:
