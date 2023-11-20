@@ -25,6 +25,8 @@ dotenv.config();
 
 const app: Express = express();
 
+logger.info("Environment Configurations:", process.env);
+
 const PORT = config.get<string>("SERVICE_PORT") || 3000;
 
 const DB_USER = config.get<string>("DB_USER");
@@ -42,7 +44,6 @@ const pool = new Pool({
 });
 
 logger.info("Database Pool Configuration:", pool);
-logger.info("Environment Configurations:", process.env);
 
 app.use(helmet());
 app.use(bodyParser.json());
