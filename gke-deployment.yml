@@ -11,8 +11,9 @@ spec:
     metadata:
       labels:
         app: IMAGE_NAME
+      namespace: test-containers
     spec:
-      serviceAccountName: test-containers/gke-test-sa
+      serviceAccountName: gke-test-sa
       containers:
       - name: IMAGE_NAME
         image: europe-west1-docker.pkg.dev/PROJECT_ID/gke-playground/IMAGE_NAME:GIT_TAG
