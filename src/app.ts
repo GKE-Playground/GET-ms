@@ -20,14 +20,25 @@ const app: Express = express();
 
 const PORT = config.get<string>("SERVICE_PORT") || 3000;
 
-// Create a MySQL connection pool
-const pool = new Pool({
-  user: "woo-backend",
-  host: "localhost",
-  database: "integration-test",
-  password: "woo-backend",
-  port: 5432,
-});
+let pool: pg.Pool;
+
+if (process.env["NODE_ENV"] === "test") {
+  pool = new Pool({
+    user: "woo-backend",
+    host: "localhost",
+    database: "integration-test",
+    password: "woo-backend",
+    port: 5432,
+  });
+} else {
+  pool = new Pool({
+    user: "tung-user",
+    host: "localhost",
+    database: "tung-database",
+    password: "tung123",
+    port: 5432,
+  });
+}
 
 app.use(helmet());
 app.use(bodyParser.json());
