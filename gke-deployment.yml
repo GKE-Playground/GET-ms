@@ -36,6 +36,10 @@ spec:
             secretKeyRef:
               name: tung-db-secret
               key: database
+        - name: DB_HOST
+          value: "localhost"
+        - name: DB_PORT
+          value: "5432"
       - name: cloud-sql-proxy
         # This uses the latest version of the Cloud SQL Proxy
         # It is recommended to use a specific version for production environments.

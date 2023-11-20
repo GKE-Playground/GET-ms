@@ -5,6 +5,7 @@ import express from "express";
 import helmet from "helmet";
 import createError from "http-errors";
 import pg from "pg";
+import winston from "winston";
 const { Pool } = pg;
 
 import type {
@@ -14,31 +15,34 @@ import type {
   Response,
 } from "express";
 
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.simple(),
+  transports: [ new winston.transports.Console() ],
+});
+
 dotenv.config();
 
 const app: Express = express();
 
 const PORT = config.get<string>("SERVICE_PORT") || 3000;
 
-let pool: pg.Pool;
+const DB_USER = config.get<string>("DB_USER");
+const DB_HOST = config.get<string>("DB_HOST");
+const DB_NAME = config.get<string>("DB_NAME");
+const DB_PASSWORD = config.get<string>("DB_PASS");
+const DB_PORT = config.get<number>("DB_PORT");
 
-if (process.env["NODE_ENV"] === "test") {
-  pool = new Pool({
-    user: "woo-backend",
-    host: "localhost",
-    database: "integration-test",
-    password: "woo-backend",
-    port: 5432,
-  });
-} else {
-  pool = new Pool({
-    user: "tung-user",
-    host: "localhost",
-    database: "tung-database",
-    password: "tung123",
-    port: 5432,
-  });
-}
+const pool = new Pool({
+  user: DB_USER,
+  host: DB_HOST,
+  database: DB_NAME,
+  password: DB_PASSWORD,
+  port: DB_PORT,
+});
+
+logger.info("Database Pool Configuration:", pool);
+logger.info("Environment Configurations:", process.env);
 
 app.use(helmet());
 app.use(bodyParser.json());

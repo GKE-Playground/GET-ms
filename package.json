@@ -10,7 +10,7 @@
     "prettier:fix": "prettier --write .",
     "build": "tsc -p tsconfig-build.json",
     "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest -c integration-test/jest.config.json --detectOpenHandles",
-    "dev": "NODE_ENV=dev nodemon"
+    "dev": "nodemon"
   },
   "author": "",
   "license": "ISC",
@@ -25,7 +25,8 @@
     "express": "^4.18.2",
     "helmet": "^7.0.0",
     "pg": "^8.11.3",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
     "@tsconfig/node18-strictest-esm": "^1.0.1",

@@ -4,5 +4,27 @@
       "__name": "SERVICE_PORT",
       "__format": "json"
     }
+  },
+  "DATABASE": {
+    "host": {
+      "__name": "DATABASE_HOST",
+      "__format": "json"
+    },
+    "port": {
+      "__name": "DATABASE_PORT",
+      "__format": "json"
+    },
+    "user": {
+      "__name": "DATABASE_USER",
+      "__format": "json"
+    },
+    "password": {
+      "__name": "DATABASE_PASS",
+      "__format": "json"
+    },
+    "database": {
+      "__name": "DATABASE_NAME",
+      "__format": "json"
+    }
   }
 }
