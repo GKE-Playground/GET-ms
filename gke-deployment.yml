@@ -12,7 +12,7 @@ spec:
       labels:
         app: IMAGE_NAME
     spec:
-      serviceAccountName: gke-test-sa
+      serviceAccountName: test-containers/gke-test-sa
       containers:
       - name: IMAGE_NAME
         image: europe-west1-docker.pkg.dev/PROJECT_ID/gke-playground/IMAGE_NAME:GIT_TAG

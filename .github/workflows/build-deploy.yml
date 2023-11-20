@@ -10,6 +10,7 @@ env:
   GKE_CLUSTER: autopilot-cluster-1
   REGION: europe-west1
   DEPLOYMENT_NAME: hello-ms
+  GIT_TAG: v0.3.0
 
 jobs:
   build-push-gcr:
@@ -31,11 +32,6 @@ jobs:
           service_account: github-actions@cst-pbag-aiml-test.iam.gserviceaccount.com
           token_format: access_token
           export_environment_variables: true
-    
-      - name: Automatic Tagging of Releases
-        id: increment-git-tag
-        run: |
-          bash ./scripts/git_update_tag.sh -v patch
 
       - name: Build and push Docker image
         env:
