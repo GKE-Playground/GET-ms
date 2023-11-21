@@ -26,10 +26,10 @@ const DB_PASSWORD = process.env["DB_PASS"];
 const DB_PORT = process.env["DB_PORT"];
 
 const pool = new Pool({
-  user: DB_USER,
+  user: Buffer.from(String(DB_USER), "base64").toString("ascii"),
   host: DB_HOST,
-  database: DB_NAME,
-  password: DB_PASSWORD,
+  database: Buffer.from(String(DB_NAME), "base64").toString("ascii"),
+  password: Buffer.from(String(DB_PASSWORD), "base64").toString("ascii"),
   port: Number(DB_PORT),
 });
 
