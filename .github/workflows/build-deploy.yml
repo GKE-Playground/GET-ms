@@ -6,11 +6,10 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
-  IMAGE_NAME: get-ms
-  GKE_CLUSTER: autopilot-cluster-1
-  REGION: europe-west1
-  DEPLOYMENT_NAME: hello-ms
-  GIT_TAG: v0.3.17
+  IMAGE_NAME: todo-get-ms
+  GKE_CLUSTER: todo-gke
+  REGION: europe-west4
+  DEPLOYMENT_NAME: todo-get-ms
 
 jobs:
   build-push-gcr:
@@ -24,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN }}
 
       - name: Authenticate to WIF
         uses: google-github-actions/auth@v1
@@ -32,8 +33,15 @@ jobs:
           service_account: github-actions@cst-pbag-aiml-test.iam.gserviceaccount.com
           token_format: access_token
           export_environment_variables: true
+    
+      - name: Automatic Tagging of Releases
+        id: increment-git-tag
+        run: |
+          bash ./scripts/git_update_tag.sh -v patch
 
       - name: Build and push Docker image
+        env:
+          GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         run: |-
           gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
           docker build -t europe-west1-docker.pkg.dev/$PROJECT_ID/gke-playground/$IMAGE_NAME:latest .
@@ -48,6 +56,8 @@ jobs:
           location: ${{ env.REGION }}
 
       - name: Deploy to GKE
+        env:
+          GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         run: |-
           sed -i "s/PROJECT_ID/$PROJECT_ID/g" gke-deployment.yml
           sed -i "s/IMAGE_NAME/$IMAGE_NAME/g" gke-deployment.yml

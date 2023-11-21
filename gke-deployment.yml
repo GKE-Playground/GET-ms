@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: IMAGE_NAME
-  namespace: test-containers
+  namespace: todo-namespace
 spec:
   selector:
     matchLabels:
@@ -13,7 +13,7 @@ spec:
         app: IMAGE_NAME
       namespace: test-containers
     spec:
-      serviceAccountName: gke-test-sa
+      serviceAccountName: todo-sa
       containers:
       - name: IMAGE_NAME
         image: europe-west1-docker.pkg.dev/PROJECT_ID/gke-playground/IMAGE_NAME:GIT_TAG
@@ -57,7 +57,7 @@ spec:
           # and should match the DB_PORT value set above.
           # Defaults: MySQL: 3306, Postgres: 5432, SQLServer: 1433
           - "--port=5432"
-          - "cst-pbag-aiml-test:europe-west4:tung-postgres-sql-instance"
+          - "cst-pbag-aiml-test:europe-west4:todo-sql-public-instance"
         securityContext:
           # The default Cloud SQL proxy image runs as the
           # "nonroot" user and group (uid: 65532) by default.

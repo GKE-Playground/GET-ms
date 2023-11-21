@@ -1,1 +1,8 @@
-{}
+{
+    "SERVICE_PORT": 3000,
+    "DB_HOST": "localhost",
+    "DB_PORT": 5432,
+    "DB_USER": "tung-user",
+    "DB_PASS": "tung123",
+    "DB_NAME":"todo-database"
+}
