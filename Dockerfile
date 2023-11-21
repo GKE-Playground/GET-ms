@@ -13,7 +13,6 @@ RUN npm ci --omit=dev
 
 FROM node:18-alpine3.16
 WORKDIR /app
-COPY ["/config/default.json", "/config/custom-environment-variables.json", "/config/production.json", "/app/config/"]
 COPY --from=ts-builder /app/dist ./dist/
 COPY --from=prod-dependencies /app/node_modules /node_modules
 COPY package.json ./
