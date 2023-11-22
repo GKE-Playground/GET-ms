@@ -1,9 +1,11 @@
 import bodyParser from "body-parser";
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
 import createError from "http-errors";
 import pg from "pg";
+
 const { Pool } = pg;
 
 import type {
@@ -36,6 +38,7 @@ const pool = new Pool({
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 app.get("/", (_req: Request, res: Response) => {
   res.send("GET ms. Hello World!");
