@@ -29,8 +29,8 @@ jobs:
       - name: Authenticate to WIF
         uses: google-github-actions/auth@v1
         with:
-          workload_identity_provider: projects/507085571061/locations/global/workloadIdentityPools/gke-pool-tung/providers/gke-playground-provider
-          service_account: github-actions@cst-pbag-aiml-test.iam.gserviceaccount.com
+          workload_identity_provider: projects/507085571061/locations/global/workloadIdentityPools/terraform-todo-pool/providers/github-provider-todo
+          service_account: github-actions-tung@cst-pbag-aiml-test.iam.gserviceaccount.com
           token_format: access_token
           export_environment_variables: true
     
@@ -55,12 +55,3 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.REGION }}
 
-      - name: Deploy to GKE
-        env:
-          GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
-        run: |-
-          sed -i "s/PROJECT_ID/$PROJECT_ID/g" gke-deployment.yml
-          sed -i "s/IMAGE_NAME/$IMAGE_NAME/g" gke-deployment.yml
-          sed -i "s/MY_LABEL/$MY_LABEL/g" gke-deployment.yml
-          sed -i "s/GIT_TAG/$GIT_TAG/g" gke-deployment.yml
-          kubectl apply -f gke-deployment.yml
